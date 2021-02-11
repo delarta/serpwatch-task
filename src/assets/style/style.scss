@@ -1,0 +1,201 @@
+@import "../fonts/font.scss";
+
+$light-gray: #f6f7f8;
+$gray: #c1c8ce;
+$black: #22262a;
+$accent: #ff4995;
+$blue: #33a0ff;
+
+body {
+  font-family: "Proxima Nova", Georgia, sans-serif;
+  font-size: 14px;
+  color: $black;
+  letter-spacing: 0.35px;
+}
+
+a {
+  color: $blue;
+}
+
+.text {
+  &-primary {
+    color: $accent !important;
+  }
+  &-muted {
+    color: $gray !important;
+  }
+  &-blue {
+    color: $blue !important;
+  }
+}
+
+.ls-1 {
+  letter-spacing: 0.4px;
+}
+
+.fz-16 {
+  font-size: 16px;
+}
+
+.fw-600 {
+  font-weight: 600;
+}
+
+#nav {
+  .navigation {
+    margin: 0 auto;
+    max-width: 60%;
+  }
+}
+
+.header {
+  padding: 16px;
+  border-bottom: solid 3px #fafafb;
+
+  .menu-text {
+    vertical-align: middle;
+  }
+}
+
+.breadcrumbs {
+  background-color: rgba($color: $light-gray, $alpha: 0.5);
+  padding: 16px;
+  margin-bottom: 4rem;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 270px 2fr;
+  grid-gap: 1rem;
+
+  .sidebar {
+    .sidecard {
+      background-color: $light-gray;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      padding: 1.25rem 1.25rem 1.5rem 1.25rem;
+
+      &-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 2rem;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        li {
+          font-weight: 600;
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 1.5rem;
+
+          .count {
+            color: rgba($color: $black, $alpha: 0.35);
+          }
+          &.active {
+            color: $blue;
+            .count {
+              color: $blue;
+            }
+          }
+        }
+      }
+
+      .color-list {
+        .colors-item {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          position: relative;
+
+          &.blue {
+            background: #006cff;
+            &.outer-circle {
+              border: 2px solid #fff;
+              box-shadow: 0 0 0 2px rgba($color: #006cff, $alpha: 0.5);
+            }
+          }
+          &.red {
+            background: #fc3e39;
+            &.outer-circle {
+              border: 2px solid #fff;
+              box-shadow: 0 0 0 2px rgba($color: #fc3e39, $alpha: 0.5);
+            }
+          }
+          &.black {
+            background: #171717;
+            &.outer-circle {
+              border: 2px solid #fff;
+              box-shadow: 0 0 0 2px rgba($color: #171717, $alpha: 0.5);
+            }
+          }
+          &.yellow {
+            background: #fff600;
+            &.outer-circle {
+              border: 2px solid #fff;
+              box-shadow: 0 0 0 2px rgba($color: #fff600, $alpha: 0.5);
+            }
+          }
+          &.pink {
+            background: #ff00b4;
+            &.outer-circle {
+              border: 2px solid #fff;
+              box-shadow: 0 0 0 2px rgba($color: #ff00b4, $alpha: 0.5);
+            }
+          }
+          &.cream {
+            background: #efdfdf;
+            &.outer-circle {
+              border: 2px solid #fff;
+              box-shadow: 0 0 0 2px rgba($color: #efdfdf, $alpha: 0.5);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .content {
+    .hero {
+      position: relative;
+      padding: 57px 55px;
+      height: 340px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      background-image: linear-gradient(to right, #ff4895, #ffc080);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      .hero-button {
+        color: white;
+        border-bottom: 2px solid #ffffff;
+        width: 80px;
+        &:hover {
+          cursor: pointer;
+          color: rgba($color: #ffffff, $alpha: 0.7);
+        }
+      }
+      .hero-img {
+        img {
+          position: absolute;
+          top: 0;
+          right: 50px;
+          width: 50%;
+        }
+      }
+    }
+
+    .bar {
+      background-color: $light-gray;
+      padding: 16px;
+    }
+  }
+
+  .products {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 1rem;
+  }
+}
