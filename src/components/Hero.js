@@ -19,7 +19,7 @@ export default function Hero() {
       delay: 0.5,
     }, {
       autoAlpha: 1,
-      y: 0,
+      y: "0%",
     }
     );
 
