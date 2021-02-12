@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import logoImg from "./assets/imgs/logo.svg";
 import iphoneImg from "./assets/imgs/iPhone6s_discover_desktop_08_iOS9.png";
@@ -14,6 +14,13 @@ import { CardBody, Container, Card, CardImg, Input } from "reactstrap";
 
 import { FaStar, FaTimes, FaBars } from "react-icons/fa";
 
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import { products } from "./products_data";
+
+gsap.registerPlugin(ScrollTrigger);
+
 function App() {
   const [priceRange, setPriceRange] = useState(50);
   const [colorsItem, setColorsItem] = useState("blue");
@@ -21,6 +28,47 @@ function App() {
   const [openFilter, setOpenFilter] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
   const [openSort, setOpenSort] = useState(false);
+
+  const phoneImgRef = useRef(null);
+  const heroTextRef = useRef([]);
+  const productsRef = useRef([]);
+
+  useEffect(() => {
+    gsap.fromTo(phoneImgRef.current, {
+      duration: 1,
+      y: "-10%",
+      autoAlpha: 0,
+      ease: "power3.out",
+      delay: 0.5,
+    }, {
+      autoAlpha: 1,
+      y: 0,
+    }
+    );
+
+    gsap.from(heroTextRef.current, {
+      duration: 1,
+      y: "-10%",
+      opacity: 0,
+      ease: "power4.out",
+      stagger: 0.2,
+    });
+
+    productsRef.current.forEach((el, index) => {
+
+      gsap.from(el, {
+        scrollTrigger: {
+          trigger: el,
+          start: 'top bottom-=100',
+        },
+        duration: 0.8,
+        opacity: 0,
+        y: "20%",
+        ease: "power3.out",
+      });
+    } )
+
+  }, []);
 
   const toggleOpenFilter = () => {
     let sidebar = document.querySelector(".sidebar");
@@ -61,7 +109,7 @@ function App() {
   const toggleOpenSort = () => {
     let sort = document.querySelector(".sort-bar");
 
-    if (!openFilter) {
+    if (!openSort) {
       sort.style.top = "calc(100vh - 300px)";
       sort.style.bottom = "88px";
     } else {
@@ -69,7 +117,7 @@ function App() {
       sort.style.bottom = "0";
     }
 
-    setOpenFilter(!openFilter);
+    setOpenSort(!openSort);
   };
 
   return (
@@ -337,17 +385,28 @@ function App() {
         <div className="content">
           <div className="hero">
             <div className="hero-text">
-              <h1 className="display-4 text-light">iPhone SE</h1>
-              <p className="text-light fz-16">
+              <h1
+                ref={(el) => (heroTextRef.current[0] = el)}
+                className="display-4 text-light"
+              >
+                iPhone SE
+              </h1>
+              <p
+                ref={(el) => (heroTextRef.current[1] = el)}
+                className="hero-subtext text-light fz-16"
+              >
                 Performance and design. Taken right to the edge.
               </p>
-              <div className="hero-button">
-                <strong>SHOP NOW</strong>
+              <div
+                ref={(el) => (heroTextRef.current[2] = el)}
+                className="hero-button"
+              >
+                SHOP NOW
               </div>
             </div>
 
             <div className="hero-img">
-              <img src={iphoneImg} />
+              <img ref={phoneImgRef} src={iphoneImg} />
             </div>
           </div>
           <div className="sort-bar">
@@ -388,126 +447,37 @@ function App() {
           </div>
 
           <div className="products mb-4">
-            <Card>
-              <CardBody>
-                <CardImg src={macbookImg} />
-                <hr className="my-4" />
-                <div className="card-content text-center ">
-                  <p>
-                    <strong>Apple Macbook</strong>
-                  </p>
-                  <div className="mb-1 ratings">
-                    <FaStar className="rated" /> <FaStar className="rated" />{" "}
-                    <FaStar className="rated" /> <FaStar className="rated" />{" "}
-                    <FaStar />
-                  </div>
-                  <p className="mb-1">
-                    <span className="text-primary">$499</span>{" "}
-                    <span className="text-muted">$599</span>
-                  </p>
+            {products &&
+              products.map((product, index) => (
+                <div
+                  ref={(el) => (productsRef.current[index] = el)}
+                  key={index}
+                >
+                  <Card>
+                    <CardBody>
+                      <CardImg src={macbookImg} />
+                      <hr className="my-4" />
+                      <div className="card-content text-center ">
+                        <p>
+                          <strong>{product.name}</strong>
+                        </p>
+                        <div className="mb-1 ratings">
+                          <FaStar className="rated" />{" "}
+                          <FaStar className="rated" />{" "}
+                          <FaStar className="rated" />{" "}
+                          <FaStar className="rated" /> <FaStar />
+                        </div>
+                        <p className="mb-1">
+                          <span className="text-primary">${product.price}</span>{" "}
+                          <span className="text-muted">
+                            <s>${product.originalPrice}</s>
+                          </span>
+                        </p>
+                      </div>
+                    </CardBody>
+                  </Card>
                 </div>
-              </CardBody>
-            </Card>
-            <Card>
-              <CardBody>
-                <CardImg src={macbookImg} />
-                <hr className="my-4" />
-                <div className="card-content text-center ">
-                  <p>
-                    <strong>Apple Macbook</strong>
-                  </p>
-                  <div className="mb-1 ratings">
-                    <FaStar className="rated" /> <FaStar className="rated" />{" "}
-                    <FaStar className="rated" /> <FaStar className="rated" />{" "}
-                    <FaStar />
-                  </div>
-                  <p className="mb-1">
-                    <span className="text-primary">$499</span>{" "}
-                    <span className="text-muted">$599</span>
-                  </p>
-                </div>
-              </CardBody>
-            </Card>
-            <Card>
-              <CardBody>
-                <CardImg src={macbookImg} />
-                <hr className="my-4" />
-                <div className="card-content text-center ">
-                  <p>
-                    <strong>Apple Macbook</strong>
-                  </p>
-                  <div className="mb-1 ratings">
-                    <FaStar className="rated" /> <FaStar className="rated" />{" "}
-                    <FaStar className="rated" /> <FaStar className="rated" />{" "}
-                    <FaStar />
-                  </div>
-                  <p className="mb-1">
-                    <span className="text-primary">$499</span>{" "}
-                    <span className="text-muted">$599</span>
-                  </p>
-                </div>
-              </CardBody>
-            </Card>
-            <Card>
-              <CardBody>
-                <CardImg src={macbookImg} />
-                <hr className="my-4" />
-                <div className="card-content text-center ">
-                  <p>
-                    <strong>Apple Macbook</strong>
-                  </p>
-                  <div className="mb-1 ratings">
-                    <FaStar className="rated" /> <FaStar className="rated" />{" "}
-                    <FaStar className="rated" /> <FaStar className="rated" />{" "}
-                    <FaStar />
-                  </div>
-                  <p className="mb-1">
-                    <span className="text-primary">$499</span>{" "}
-                    <span className="text-muted">$599</span>
-                  </p>
-                </div>
-              </CardBody>
-            </Card>
-            <Card>
-              <CardBody>
-                <CardImg src={macbookImg} />
-                <hr className="my-4" />
-                <div className="card-content text-center ">
-                  <p>
-                    <strong>Apple Macbook</strong>
-                  </p>
-                  <div className="mb-1 ratings">
-                    <FaStar className="rated" /> <FaStar className="rated" />{" "}
-                    <FaStar className="rated" /> <FaStar className="rated" />{" "}
-                    <FaStar />
-                  </div>
-                  <p className="mb-1">
-                    <span className="text-primary">$499</span>{" "}
-                    <span className="text-muted">$599</span>
-                  </p>
-                </div>
-              </CardBody>
-            </Card>
-            <Card>
-              <CardBody>
-                <CardImg src={macbookImg} />
-                <hr className="my-4" />
-                <div className="card-content text-center ">
-                  <p>
-                    <strong>Apple Macbook</strong>
-                  </p>
-                  <div className="mb-1 ratings">
-                    <FaStar className="rated" /> <FaStar className="rated" />{" "}
-                    <FaStar className="rated" /> <FaStar className="rated" />{" "}
-                    <FaStar />
-                  </div>
-                  <p className="mb-1">
-                    <span className="text-primary">$499</span>{" "}
-                    <span className="text-muted">$599</span>
-                  </p>
-                </div>
-              </CardBody>
-            </Card>
+              ))}
           </div>
 
           <div className="pagination">
