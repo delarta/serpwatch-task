@@ -44,7 +44,7 @@ a {
   font-weight: 600;
 }
 
-// NAVIGATION
+// ===== NAVIGATION STYLE =====
 #nav {
   margin-top: 4rem;
   margin-bottom: 3.5rem;
@@ -64,6 +64,13 @@ a {
     grid-column-gap: 3rem;
     text-align: center;
 
+    & > div {
+      &:hover {
+        cursor: pointer;
+        color: $blue;
+      }
+    }
+
     @media screen and (max-width: 768px) {
       display: block;
       max-width: 100%;
@@ -72,10 +79,6 @@ a {
 
       div {
         margin-bottom: 1rem;
-        &:hover {
-          cursor: pointer;
-          color: $blue;
-        }
       }
     }
   }
@@ -85,7 +88,6 @@ a {
     grid-template-columns: 1fr;
     align-items: center;
     justify-content: start;
-    // height: 200px;
 
     grid-template-areas:
       "rightMenu"
@@ -137,6 +139,7 @@ a {
   }
 }
 
+// ===== HEADER =====
 .header {
   background: $white;
   z-index: 900;
@@ -192,6 +195,7 @@ a {
   }
 }
 
+// ===== BREADCRUMBS =====
 .breadcrumbs {
   background-color: rgba($color: $light-gray, $alpha: 0.5);
   padding: 16px;
@@ -212,6 +216,7 @@ a {
   }
 }
 
+// ===== MAIN =====
 .main {
   display: grid;
   grid-template-columns: 270px 2fr;
@@ -243,6 +248,8 @@ a {
       opacity: 0;
     }
   }
+
+  // ===== SIDEBAR =====
   .sidebar {
     display: block;
     transition: left 300ms ease-out;
@@ -271,7 +278,7 @@ a {
           .count {
             color: rgba($color: $black, $alpha: 0.35);
           }
-          &:hover{
+          &:hover {
             cursor: pointer;
             color: $blue;
             .count {
@@ -346,7 +353,6 @@ a {
 
     @media screen and (max-width: 768px) {
       background-color: $light-gray;
-      // display: none;
       position: fixed;
       z-index: 999;
       width: 80vw;
@@ -358,6 +364,7 @@ a {
     }
   }
 
+  // ===== CONTENT =====
   .content {
     .hero {
       position: relative;
@@ -386,9 +393,8 @@ a {
         }
       }
 
-      .hero-subtext{
+      .hero-subtext {
         margin-bottom: 2.5rem;
-
       }
       .hero-button {
         color: white;
@@ -419,7 +425,6 @@ a {
       }
     }
 
-
     .sort-bar {
       background-color: $light-gray;
       height: 58px;
@@ -430,7 +435,6 @@ a {
       margin-bottom: 1.5rem;
       border-radius: 4px;
       transition: all 500ms ease-out;
-
 
       @media screen and (max-width: 992px) {
         padding: 1.2rem;
@@ -447,7 +451,6 @@ a {
         bottom: auto;
         margin: 0;
         display: block;
-
       }
 
       .bar-dropdown {
@@ -527,10 +530,9 @@ a {
         justify-content: center;
         color: $black;
         transition: background 300ms ease-out;
-        &:hover{
+        &:hover {
           cursor: pointer;
           background-color: $gray;
-        
         }
         &.active {
           background-color: $black;
@@ -540,6 +542,7 @@ a {
     }
   }
 
+  // ===== PRODUCTS =====
   .products {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -556,7 +559,7 @@ a {
   }
 }
 
-// MOBILE NAV
+// ===== MOBILE NAV =====
 .mobile-nav {
   display: none;
   @media screen and (max-width: 768px) {
@@ -566,11 +569,9 @@ a {
     justify-content: center;
     align-items: center;
     height: 88px;
-    padding: 0 15px;
-
-    background-color: $light-gray;
     width: 100%;
-
+    padding: 0 15px;
+    background-color: $light-gray;
     position: fixed;
     bottom: 0;
     z-index: 900;
